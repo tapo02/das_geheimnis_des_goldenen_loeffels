@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Geheimnis des goldenen Löffels</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="parchment-bg"></div>
+    
+    <div class="game-container">
+        <div class="header">
+            <h1>Das Geheimnis des goldenen Löffels</h1>
+            <div class="points-display" id="points-display" style="display: none;">
+                Punkte: <span id="points">0</span>
+            </div>
+        </div>
+
+        <div id="instructions">
+            <div class="content">
+                <h2>Spielanleitung</h2>
+                <div class="story-text">
+                    <p>Begib dich auf eine spannende Reise durch die Sprachlandschaft Österreichs! In diesem interaktiven Spiel bist du einem geheimnisvollen Löffelzeichen auf der Spur. Deine Reise führt dich an verschiedene Orte, wo du auf interessante NPCs triffst und typisch österreichische Begriffe kennenlernst. Aber Achtung: Um weiterzukommen und die Geheimnisse der Sprachloge zu lüften, musst du die Bedeutung dieser Wörter richtig erkennen und sie anschließend anwenden!</p>
+                    <p>Das Spiel besteht aus zwei Phasen.</p>
+
+                    <h3>Phase 1</h3>
+                    <p>In Phase 1 lernst du die Wörter in Interaktionen mit NPCs kennen. Jede Interaktion folgt einem ähnlichen Muster:</p>
+                    <p>Du liest einen Einführungstext, der dich in die aktuelle Situation und zu neuen NPCs einführt. Dabei wirst du auf ein österreichisches Wort stoßen, das im Kontext der Geschichte eine Rolle spielt und das du möglicherweise nicht sofort verstehst. Am Ende des Textes werden dir zwei Auswahlmöglichkeiten präsentiert. Diese Auswahlmöglichkeiten basieren auf der Interpretation des neu gelernten Wortes. Wähle die Option, die deiner Meinung nach die korrekte Bedeutung des Wortes im Kontext widerspiegelt. Nach deiner Wahl erhältst du sofortiges Feedback in Form einer Reaktion der NPCs. Hast du die richtige Wahl getroffen, erhältst du einen Punkt. Die Geschichte nimmt ihren Lauf und du kommst der Lösung näher. Hast du dich geirrt, wird dies ebenfalls in der Geschichte reflektiert. Die NPCs geben dir einen weiteren Hinweis oder eine Erklärung, die dir hilft, die tatsächliche Bedeutung des Wortes zu verstehen, damit du sie dennoch lernen kannst. Du erhältst jedoch keinen Punkt für diese spezifische Interaktion.</p>
+                    <p>Nach jeder Interaktion wird dir eine Übersicht über das neu entdeckte Wort angezeigt. Dieses kannst du dann deinem persönlichen Wörterbuch hinzufügen, das alle neuen Wörter auf einem Fleck für dich sammelt. Außerdem kannst du es im Falle des Falles nutzen, um die Wörter noch einmal nachzuschlagen.</p>
+                    
+                    <h3>Phase 2</h3>
+                    <p>In Phase 2 geht es darum, dass du zeigst, dass du die in Phase 1 neu gelernten Wörter nicht nur verstanden hast, sondern sie auch aktiv anwenden kannst. Dafür wird dir ein Text angezeigt, der Lücken enthält. Die Lücken sollst du mit den Wörtern füllen, die du vorher durch die Interaktionen in Phase 1 kennengelernt hast. Welches Wort wo einzusetzen ist, wird aus dem Kontext ersichtlich. Solltest du bei einem Wort Hilfe benötigen, kannst du die Punkte, die du in Phase 1 gesammelt hast, einlösen gegen einen kurzen Blick in das Wörterbuch. Alternativ kannst du dir auch den ersten Buchstaben des Wortes anzeigen lassen. Für falsche Antworten wird dir ein Punkt abgezogen.</p>
+                    <p>Solltest du zu einem Zeitpunkt keine Punkte mehr haben und trotzdem weitere Fehler machen, kannst du in einem Minigame die Zielwörter wiederholen und so Punkte sammeln, die du dann im Lückentext wieder einlösen kannst.</p>
+                    <div class="button-container">
+                        <button id="to-introduction-btn" onclick="toIntroduction()">Die Geschichte beginnt...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="introduction" style="display: none;">
+            <div class="content">
+                <h2>Einleitung</h2>
+                <div class="story-text">
+                    <p>In einem kleinen, staubigen Antiquariat in Krieglach ziehst du ein altes, abgegriffenes Kochbuch aus dem Regal. Zwischen zwei Seiten liegt ein vergilbter Zettel, fast schon zerfallen, beschriftet mit krakeliger Hand:</p>
+                    <p>„Nur wer das Land versteht, wird die letzte Zutat finden.“</p>
+                    <p>Darunter: ein seltsames Zeichen. Es sieht aus wie ein Löffel. Aber nicht irgendein Löffel – ein golden schimmernder, fein verzierter Löffel, der wie ein Wappen dort prangt.</p>
+                    <p>Je länger du dich mit dem Zettel beschäftigst, desto mehr spürst du, dass du ihn nicht einfach beiseitelegen kannst. Es ist, als würde er dich rufen – wie ein Rätsel, das gelöst werden will. In den folgenden Tagen suchst du in alten Zeitungsarchiven, auf vergessenen Inschriften und in den Büchern der Bibliotheken nach Hinweisen. Immer wieder stößt du dabei auf die Erwähnung eines gut behüteten, geheimen Schatzes.</p>
+                    <p>Niemand weiß, was es ist oder wo man es findet, aber überall stößt du auf dieselbe Andeutung:</p>
+                    <p>„Nur wer Österreich wirklich kennt, wird Zugang finden.“</p>
+                    <p>Du beschließt, der Sache auf den Grund zu gehen, und folgst dem ersten Hinweis, den du auf der Rückseite des Zettels entdeckst – den inzwischen fast verbleichten, alten Stadtstempel der Stadt Hohenberg. Du machst dich auf den Weg ins Rathaus der Stadt, um dort mal nachzufragen, was es damit auf sich haben könnte…</p>
+                    <div class="button-container">
+                        <button id="start-game-btn">Spiel starten</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="phase-1" style="display: none;">
+            <div class="content" id="phase1-content">
+                <h2>Phase 1</h2>
+                <h3 id="interaction-headline"></h3>
+                <div class="interaction" id="interaction">
+                    <div class="text-container">
+                        <div class="story-text" id="story-text"></div>
+                        <div class="story-end" id="story-end"></div>
+                        <div class="choices" id="choices">
+                            <!-- Buttons werden hier eingefügt -->
+                        </div>
+                    </div>
+                </div>
+                <div class="reaction" id="reaction" style="display: none;">
+                    <div id="reaction-text"></div>
+                    <div class="button-container">
+                        <button id="next">Neues Wort gefunden</button>
+                    </div>
+                    <div class="modal" id="new-word-overview">
+                        <div class="modal-content">
+                            <h3 id="target-word"></h3>
+                            <div id="explanation"></div>
+                            <div id="example-sentence"></div>
+                            <div class="img-container">
+                                <figure>
+                                    <img class="linguistic-map" id="linguistic-map">
+                                    <figcaption id="figcaption"></figcaption>
+                                </figure>
+                            </div>
+                            <div class="button-container">
+                                <button id="next-modal">Zu Wörterbuch hinzufügen</button>
+                            </div>
+                            <div class="button-container">
+                                <button id="add-word-to-dict">Zu Wörterbuch hinzufügen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="phase-2" style="display: none;">
+            <div class="content" id="phase2-content">
+                <h2>Phase 2</h2>
+                <h3>Lückentext</h3>
+                <div id="phase-2-start">
+                    <div class="story-text">
+                        <p>Dank des Hinweises von Frau Moser weißt du nun also, dass du dich in die Pfarrkirche St. Jakob begeben musst, um dahinterzukommen, wobei es sich bei dem gut gehüteten Geheimnis der Loge handelt. Und du weißt, dass du beweisen musst, dass du österreichisches Kulturgut, und dazu gehören auch die österreichischen Sprachgepflogenheiten, zu schätzen weißt.</p>
+                        <p>Beim Betreten der kühlen, ehrwürdigen Pfarrkirche St. Jakob umgibt dich der vertraute Duft von Weihrauch und altem Holz. Das Licht fällt durch die bunten Fenster und wirft farbige Muster auf den Steinboden. Kaum hast du ein paar Schritte gemacht, tritt ein älterer Herr aus einer Seitennische hervor. Er trägt einen schlichten schwarzen Anzug, hat silbergraues Haar und einen durchdringenden Blick. In der Hand hält er ein gefaltetes Blatt Papier.</p>
+                        <p>„Ah, du bist also der oder die Neue, von dem Frau Moser gesprochen hat“, sagt er mit ruhiger Stimme. „Wenn du wirklich wissen willst, worum es sich bei dem Geheimnis der Loge handelt, dann musst du erst beweisen, dass du unsere Sprache und unser Kulturgut zu würdigen weißt. Keine Sorge – es ist nur ein kleiner Test. Ein Lückentext.“</p>
+                        <p>Er reicht dir das Blatt. Du erkennst, dass es sich um einen kurzen Text handelt, in dem typische österreichische Ausdrücke fehlen. Der Mann sieht dich auffordernd an.</p>
+                        <p>„Fülle die Lücken. Verwende dabei Begriffe, wie sie bei uns in Österreich gebräuchlich sind. Nur wer das kann, ist würdig, weiterzugehen.“</p>
+
+                         <div class="button-container">
+                                <button id="gap-text-btn" onclick="loadGapText()">Zum Lückentext</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="phase-2-game" style="display: none;">
+                    <div class="story-text" id="costs">
+                        <p>Solltest du einmal nicht weiter wissen, kannst du dir helfen lassen. Hilfestellungen kosten Punkte:</p>
+                        <ul>
+                            <li>Nächsten Buchstaben des ausgewählten Worts anzeigen lassen: 1 Punkt wird abgezogen</li>
+                            <li>Blick ins Wörterbuch (mind. 2 Punkte notwendig): 2 Punkte werden abgezogen</li>
+                        </ul>
+                        <p>Deine Antworten kannst du über den Button „Lösungen überprüfen“ überprüfen. Aber Achtung: jede falsche Antwort kostet dich ebenfalls einen Punkt!</p>
+                        <p>Um das Spiel zu gewinnen und das Geheimnis zu lüften, musst du schauen, dass dein Punktestand nicht unter 0 fällt.</p>
+                    </div>
+                    <div class="story-text" id="gap-text-container"></div>
+                    <div class="button-container">
+                        <button id="hint-btn" onclick="showHint()">Nächsten Buchstaben anzeigen</button>
+                        <button id="solutions-btn" onclick="checkAnswers()">Lösungen überprüfen</button>
+                        <button id="minigame-btn" onclick="loadScrambleGame()" style="display: none;">Weiter üben</button>
+                        <button id="recipe-btn" onclick="showRecipe()" style="display: none;">Geheimnis offenbaren</button>
+                    </div>
+                    <p id="hint"></p>
+                    <p id="feedback"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="minigame">
+            <div id="minigame-scramble" style="display: none;">
+                <div class="content">
+                    <h2>Minigame</h2>
+                    <h3>Entschlüssle das Wort!</h3>
+                    <div class="story-text">
+                        <p id="scramble-meaning"></p>
+                        <p id="scrambled-word-display"></p>
+                        <input type="text" id="scramble-input" placeholder="Gib das Wort hier ein" class="blank">
+                        <button id="check-scramble-btn">Überprüfen</button>
+                        <p id="scramble-feedback"></p>
+                        <div class="button-container">
+                            <button id="next-scramble-btn" style="display: none;">Nächstes Wort</button>
+                            <button id="minigame-scramble-back-btn" style="display: none;">Zurück zum Lückentext</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+        <div class="recipe" id="recipe" style="display: none;">
+            <div class="content">
+                <h2>Das gutbehütetste Rezept für Kaiserschmarrn</h2>
+                <h3>Das große Geheimnis ist gelüftet!</h3>
+                <div class="story-text">
+                    <div class="ingredients">
+                        <h2>Zutaten (für 2 Personen):</h2>
+                        <ul>
+                            <li>4 Eier (Größe M)</li>
+                            <li>200 ml Milch</li>
+                            <li>120 g Mehl (Typ 405 oder 550)</li>
+                            <li>1 Päckchen Vanillezucker</li>
+                            <li>1 Prise Salz</li>
+                            <li>30 g Zucker (plus etwas zum Bestreuen)</li>
+                            <li>30 g Rosinen (optional, z. B. in Rum eingeweicht)</li>
+                            <li>20 g Butter (zum Ausbacken)</li>
+                            <li>Puderzucker zum Bestreuen</li>
+                            <li>Apfelmus oder Zwetschgenröster zum Servieren</li>
+                        </ul>
+                    </div>
+
+                    <div class="preparation">
+                        <h2>Zubereitung:</h2>
+                        <ol>
+                            <li><strong>Teig zubereiten:</strong><br />
+                                Die Eier trennen. Eigelb mit Milch, Mehl, Vanillezucker und einer Prise Salz zu einem glatten Teig verrühren. Das Eiweiß mit dem Zucker steif schlagen und vorsichtig unter den Teig heben.
+                            </li>
+                            <li><strong>Backen:</strong><br />
+                                In einer großen Pfanne die Butter bei mittlerer Hitze schmelzen. Den gesamten Teig hineingeben und optional die Rosinen darauf verteilen. Den Teig bei mittlerer Hitze etwa 4–5 Minuten anbacken, bis die Unterseite goldbraun ist. Dann mit einem Pfannenwender vierteln, wenden und weitere 3–4 Minuten backen.
+                            </li>
+                            <li><strong>Zerrupfen:</strong><br />
+                                Den Teig in der Pfanne mit zwei Gabeln oder Pfannenwendern in grobe Stücke reißen. Noch 1–2 Minuten weiterbraten, bis alle Stücke leicht gebräunt sind.
+                            </li>
+                            <li><strong>Servieren:</strong><br />
+                                Kaiserschmarrn auf Tellern anrichten, mit Puderzucker bestäuben und mit Apfelmus oder Zwetschgenröster servieren.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+        <button class="dictionary-btn" id="dictionary-btn" style="display: none;" onclick="toggleDictionary()">Wörterbuch</button>
+
+        <div class="modal" id="dictionary-modal">
+            <div class="modal-content">
+                <button class="close-btn" onclick="toggleDictionary()">×</button>
+                <h3>Wörterbuch</h3>
+                <div class="word-list-container">
+                    <p id="no-words-added" style="text-align: center; opacity: 0.7; display: none;">
+                        Noch keine Wörter hinzugefügt.
+                    </p>
+                    <div id="word-details">
+                        <!-- hier kommen die summarys rein -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <script src="script.js"></script>
+
+</body>
+</html>
