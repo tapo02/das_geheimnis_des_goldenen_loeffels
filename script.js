@@ -53,7 +53,7 @@ const vocab = [
             }
         ]
 
-    },
+    }, 
     {
         word: "Beisl",
         meaning: "Kneipe, traditionelles, gemütliches österreichisches Gasthaus, das oft typische Gerichte und Getränke zu moderaten Preisen anbietet",
@@ -109,7 +109,7 @@ const vocab = [
     {
         word: "Häferl",
         meaning: "Tasse",
-        example: "In der Früh trinke ich immer ein Häferl Kaffee zu meinem Frühstück.",
+        example: "In der Früh trinke ich immer ein Häferl Tee zu meinem Frühstück.",
         linguisticMap: "images/8_3h_Tasse.jpg",
         sourceMap: "https://www.atlas-alltagssprache.de/r8-f3h-2/?child=runde",
         interaction: 5,
@@ -129,24 +129,24 @@ const vocab = [
         ]
     },
     {
-        word: "Beispielwort",
-        meaning: "[Platzhalter]",
-        example: "[Platzhalter]",
-        linguisticMap: "[Platzhalter]",
-        sourceMap: "[Platzhalter]",
+        word: "Polster",
+        meaning: "Kissen",
+        example: "Der kleine Junge kuschelte sich mit einem weichen Polster und seinem Lieblingsbuch in die Leseecke.",
+        linguisticMap: "images/10_02c_Kissen.jpg",
+        sourceMap: "https://www.atlas-alltagssprache.de/r10-f2c/?child=runde",
         interaction: 6,
-        storyText: "<p>Du begibst dich auf den Weg Richtung Familie Moser. Dort macht eine ältere Dame die Tür auf. Du erklärst kurz dein Anliegen und die Dame bittet dich in ihr Haus hinein. Im Haus stößt du auf einen Polster, auf den das goldene Löffelsymbol gestickt wurde. Daraufhin erklärt die Dame, dass das Zeichen zu einer Geheimloge gehört, die ein Stück österreichisches Kulturgut bewacht.</p><p>Wer es soweit geschafft hat, überhaupt auf die Geheimloge zu stoßen, bekommt die Chance auf einen Blick auf dieses Kulturgut. Allerdings erlaubt sie das nur den Menschen, die beweisen können, dass sie Österreich zu schätzen wissen. Dazu gehört für sie auch, dass man österreichische Begriffe anwendet.</p>",
-        storyEnd: "<p>Du wirst darauf hingewiesen, dass die Loge ihr Quartier noch immer in der Pfarrkirche St. Jakob in Grauenstein hat. Wer einen Blick auf das gut gehütete Kulturgut erhaschen will, muss sich dorthin begeben.</p>",
+        storyText: "<p>Nachdem du die Bäckerei hinter dir gelassen hast, folgst du dem Weg, den dir die Verkäuferin beschrieben hat. Nur wenige Minuten später stehst du vor dem Haus der Mosers. Du gehst die Treppen der Terrasse hinauf und klopfst an die schwere Holztür. Sie öffnet sich nur einen Spalt, und ein paar graue Haare blitzen hindurch.</p><p>Eine knarrende Stimme fragt von drinnen: „Was wollen Sie?“</p><p>Du erklärst dein Anliegen: „Ich bin auf der Suche nach einem Symbol, auf das ich gestoßen bin. Es handelt sich um einen goldenen Löffel. Ich habe gehört, Sie könnten mir eventuell weiterhelfen.“</p><p>Die Tür öffnet sich ein Stück weiter, bis das ganze Gesicht einer älteren Dame zu sehen ist. Sie schüttelt langsam den Kopf. „Ein goldener Löffel, sagen Sie? Das sagt mir gar nichts“, doch ihr Blick huscht kurz über deine Schulter, als wollte sie sichergehen, dass niemand in der Nähe lauscht. </p><p>Du bemerkst, wie ihre Augen kurz an einer Stelle hängenbleiben.</p><p>„Ach, im Alter wird man wirklich immer vergesslicher“, murmelt sie. „Ich wollte den Polster dort vorne schon vorhin mit hineinnehmen, um ihn zu waschen, aber das hab ich komplett vergessen. Würden Sie so freundlich sein und mir ihn reichen?“</p><p>Als du dich umdrehst und ihrem Blick folgst, siehst du an der Stelle eine Terrassensitzbank stehen. Auf ihr befinden sich ein besticktes Tuch und ein Kissen.</p>",
+        storyEnd: "Welchen Gegenstand sollst du der Frau reichen?",
         choices: [
             {
-                text: "[Platzhalter]",
+                text: "Die Frau möchte das bestickte Tuch haben.",
                 isCorrect: false,
-                reaction: "[Platzhalter]"
+                reaction: "<p>Du gehst zur Bank und nimmst das Tuch in die Hand, um es der Frau zu geben. Du streckst es ihr entgegen, doch sie schüttelt den Kopf.</p><p>„Nein, das Tuch habe ich schon letzte Woche gewaschen. Ich meinte den Polster dahinten, das Kissen da.“</p><p>Du legst das Tuch wieder zurück und nimmst stattdessen das Kissen in die Hand. Als du es hochnimmst, fällt dir ganz unten ein aufgestickter goldener Löffel auf.</p><p>Das Symbol, nach dem du suchst!</p><p>Du siehst dir die Stickerei genauer an. Unter dem Löffel erkennst du noch eine weitere kleine Schrift: „Logensitz Pfarrkirche St. Jakob, Grauenstein“.</p><p>Aha, die Pfarrkirche schon wieder. Die kam ja auch bereits in der Notiz im Rathaus vor.</p><p>Als du aufblickst, der alten Dame das Kissen reichst und dich verabschiedest, siehst du ein wissendes Lächeln in ihrem Gesicht.</p>"
             },
             {
-                text: "[Platzhalter]",
-                isCorrect: false,
-                reaction: "[Platzhalter]"
+                text: "Die Frau möchte das Kissen haben.",
+                isCorrect: true,
+                reaction: "<p>Du gehst zur Bank und nimmst das Kissen in die Hand. Als du es hochnimmst, fällt dir ganz unten ein aufgestickter goldener Löffel auf.</p><p>Das Symbol, nach dem du suchst!</p><p>Du siehst dir die Stickerei genauer an. Unter dem Löffel erkennst du noch eine weitere kleine Schrift: „Logensitz Pfarrkirche St. Jakob, Grauenstein“.</p><p>Aha, die Pfarrkirche schon wieder. Die kam ja auch bereits in der Notiz im Rathaus vor.</p><p>Als du aufblickst, der alten Dame das Kissen reichst und dich verabschiedest, siehst du ein wissendes Lächeln in ihrem Gesicht.</p>"
             }
         ]
     }
@@ -495,7 +495,7 @@ function loadGapText() {
      window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-const textTemplate = "<p>An einem kühlen Herbstnachmittag betritt Paul ein kleines, gemütliches [Beisl]. Drinnen ist es warm, es riecht nach gebratenem Essen und altem Holz. Zwei Männer spielen Karten, der Wirt nickt Paul kurz zu. Die Fenster sind leicht beschlagen, und auf dem Tisch in der Ecke flackert eine Kerze.</p><p>Draußen fährt gerade eine [Bim] vorbei. Man hört das Quietschen auf den Schienen, das in der engen Gasse widerhallt. Paul wirft einen Blick hinaus, bevor er sich an seinen Platz setzt. Ihm fällt ein alter, dunkler [Kasten] auf, der neben der Tür steht – vielleicht ein alter Brotschrank oder ein Aufbewahrungsort für Geschirr.</p><p>Der Wirt bringt ihm ein [Häferl] mit dampfend heißem Tee. Der Rand ist leicht abgesprungen, aber Paul stört das nicht. Er nimmt einen Schluck, schaut sich um und atmet tief ein. Der Tee ist stark, beinahe herb, genau richtig für diesen Tag.</p><p>Aus der Küche dringt der Geruch von Essig und Zwiebeln. Eine Bedienung bringt einen Teller mit [Erdäpfel]salat an den Nebentisch. Paul sieht das dampfende Schnitzel daneben und bekommt selbst ein wenig Hunger.</p><p>Zurück am Tisch will er sich noch einen Apfelstrudel gönnen, doch als der Wirt zurückkommt, schüttelt dieser bedauernd den Kopf. „Der Strudel [ist] leider [aus]“, sagt er, „aber ich hätte noch Topfenkuchen.“ Paul lacht leise, nickt und sagt: „Dann eben den. Hauptsache, ich bekomme noch etwas Süßes.“ Erleichtert lehnt er sich zurück und genießt die Atmosphäre, während draußen der Herbstwind durch die Gassen pfeift.</p>";
+const textTemplate = "<p>An einem kühlen Herbstnachmittag betritt Paul ein kleines, gemütliches [Beisl]. Drinnen ist es warm, es riecht nach gebratenem Essen und altem Holz. Zwei Männer spielen Karten, der Wirt nickt Paul kurz zu. Die Fenster sind leicht beschlagen, und auf dem Tisch in der Ecke flackert eine Kerze.</p><p>Draußen fährt gerade eine [Bim] vorbei. Man hört das Quietschen auf den Schienen, das in der engen Gasse widerhallt. Paul wirft einen Blick hinaus, bevor er sich an seinen Platz setzt. Ihm fällt ein alter, dunkler [Kasten] auf, der neben der Tür steht – vielleicht ein alter Brotschrank oder ein Aufbewahrungsort für Geschirr.</p><p>Der Wirt bringt ihm ein [Häferl] mit dampfend heißem Tee. Der Rand ist leicht abgesprungen, aber Paul stört das nicht. Er nimmt einen Schluck, schaut sich um und atmet tief ein. Der Tee ist stark, beinahe herb, genau richtig für diesen Tag.</p><p>Aus der Küche dringt der Geruch von Essig und Zwiebeln. Eine Bedienung bringt einen Teller mit [Erdäpfel]salat an den Nebentisch. Paul sieht das dampfende Schnitzel daneben und bekommt selbst ein wenig Hunger.</p><p>Auf dem Sessel gegenüber liegt ein kleiner, weicher [Polster]. Paul nimmt ihn und legt ihn sich in den Rücken. So sitzt er bequemer.</p><p>Zurück am Tisch will er sich noch einen Apfelstrudel gönnen, doch als der Wirt zurückkommt, schüttelt dieser bedauernd den Kopf. „Der Strudel [ist] leider [aus]“, sagt er, „aber ich hätte noch Apfelkuchen.“ Paul lacht leise, nickt und sagt: „Dann eben den. Hauptsache, ich bekomme noch etwas Süßes.“ Erleichtert lehnt er sich zurück und genießt die Atmosphäre, während draußen der Herbstwind durch die Gassen pfeift.</p>";
 
 let correctAnswers = [];
 let activeInput = null;
