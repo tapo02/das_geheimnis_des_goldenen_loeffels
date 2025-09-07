@@ -229,15 +229,26 @@ function loadInteraction() {
         btn.innerHTML = choice.text;
 
         btn.onclick = () => {
-            // Punkte erhöhen, wenn richtig
+            // Punkte erhöhen und Rückmeldung im points-reaction div anzeigen
+            const pointsReactionElement = document.getElementById('points-reaction');
+
             if (choice.isCorrect) {
                 gameState.points += 1;
 
+                // Feedback-Nachricht im Punkte-Div setzen
+                pointsReactionElement.textContent = "Du hast in der Situation passend gehandelt und die Bedeutung richtig erkannt. Ein Punkt für dich!";
+                pointsReactionElement.style.color = "#49d449";
+                
                 // Anzeige aktualisieren:
                 const pointsDisplay = document.getElementById("points-display");
                 if (pointsDisplay) {
                     pointsDisplay.textContent = `Punkte: ${gameState.points}`;
                 }
+
+            } else {
+                // Feedback für falsche Antwort
+                pointsReactionElement.textContent = "Du konntest dieses Mal leider keinen Punkt sammeln.";
+                pointsReactionElement.style.color = "#ef6868";
             }
 
             // Reaktion anzeigen
@@ -249,9 +260,9 @@ function loadInteraction() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
-        choicesContainer.appendChild(btn);
-    });
-}
+            choicesContainer.appendChild(btn);
+        });
+    }
 
 
 document.getElementById('next').addEventListener('click', () => {
@@ -305,9 +316,19 @@ document.getElementById('next').addEventListener('click', () => {
             showModal(currentModalIndex);
         }
     };
-
-    // finalBtn kann wie gewünscht weiterverarbeitet werden, z. B. Wörter speichern
 });
+
+function updateProgressBar() {
+    const totalInteractions = Math.max(...vocab.map(item => item.interaction));
+    const progressPercentage = (gameState.currentInteraction / totalInteractions) * 100;
+    const progressBar = document.getElementById('progress-bar');
+
+    // console.log(`Aktueller Fortschritt Phase 1: ${progressPercentage}%`);
+
+    if (gameState.currentInteraction <= totalInteractions) {
+        progressBar.style.width = `${progressPercentage}%`;
+    }
+}
 
 document.getElementById('add-word-to-dict').addEventListener('click', function () {
     const matchingVocabs = vocab.filter(v => v.interaction === gameState.currentInteraction);
@@ -321,6 +342,8 @@ document.getElementById('add-word-to-dict').addEventListener('click', function (
         }
     });
 
+    updateProgressBar();
+
     // Interaktion fortsetzen
     gameState.currentInteraction += 1;
 
@@ -329,9 +352,9 @@ document.getElementById('add-word-to-dict').addEventListener('click', function (
     if (nextVocab) {
         loadInteraction();
     } else {
-        // Falls keine weitere Interaktion: Phase 2 anzeigen
-        document.getElementById('phase-1').style.display = 'none';
-        document.getElementById('phase-2').style.display = 'block';
+        // Falls keine weitere Interaktion: Ende Phase 1 anzeigen
+        document.getElementById('reaction').style.display = 'none';
+        document.getElementById('phase1-completed').style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
@@ -339,37 +362,53 @@ document.getElementById('add-word-to-dict').addEventListener('click', function (
 
 function toggleDictionary() {
     const dictionaryModal = document.getElementById('dictionary-modal');
-    const phase1 = document.getElementById("phase-1")
-    const phase2 = document.getElementById("phase-2")
-    const feedback = document.getElementById("feedback")
+    const phase1 = document.getElementById("phase-1");
+    const phase2 = document.getElementById("phase-2");
+    const phase2Game = document.getElementById("phase-2-game");
+    const phase2Start = document.getElementById("phase-2-start");
+    const feedback = document.getElementById("feedback");
 
+    // Schließe das Wörterbuch, wenn es bereits offen ist, unabhängig vom Spielstatus.
+    if (dictionaryModal.style.display === 'flex') {
+        dictionaryModal.style.display = 'none';
+        return;
+    }
+
+    // Phase 1 Logik
     if (phase1.style.display === 'block') {
-        if (dictionaryModal.style.display === 'flex') {
-            dictionaryModal.style.display = 'none';
-        } else {
-            dictionaryModal.style.display = 'flex'; 
-            loadDictionary()
+        dictionaryModal.style.display = 'flex';
+        loadDictionary();
+    } 
+    // Phase 2 Logik
+    else if (phase2.style.display === 'block') {
+        // Guard-Clause: Tue nichts, wenn das 'phase-2-start' Div sichtbar ist.
+        if (phase2Start.style.display === 'block') {
+            return;
         }
-    } else if (phase2.style.display === 'block') {
-        if (dictionaryModal.style.display === 'flex') {
-            dictionaryModal.style.display = 'none';
-        } else {
+
+        // Überprüfe die Bedingungen nur, wenn der eigentliche Lückentext-Modus ('phase-2-game') aktiv ist.
+        if (phase2Game.style.display === 'block') {
             if (gameState.points >= 2) {
-                gameState.points = gameState.points - 2; // zwei Punkte abziehen bei Öffnen des Wörterbuchs
-                dictionaryModal.style.display = 'flex'; 
-                loadDictionary()
+                gameState.points -= 2; // zwei Punkte abziehen
+                // Aktualisiere die Punkteanzeige
+                const pointsDisplay = document.getElementById("points-display");
+                if (pointsDisplay) {
+                    pointsDisplay.textContent = `Punkte: ${gameState.points}`;
+                }
+                
+                dictionaryModal.style.display = 'flex';
+                loadDictionary();
             } else {
-                feedback.textContent = "Du hast nicht genügend Punkte, um einen Blick in das Wörterbuch zu werfen."
+                feedback.textContent = "Du hast nicht genügend Punkte, um einen Blick in das Wörterbuch zu werfen.";
             }
         }
-    } else {
-        // in Minigame-Modus
-        if (dictionaryModal.style.display === 'flex') {
-            dictionaryModal.style.display = 'none';
-        } else {
-            dictionaryModal.style.display = 'flex'; 
-            loadDictionary()
-        }
+    }
+    // Minigame-Modus Logik
+    else {
+        // Hier können Sie Logik hinzufügen, wenn das Wörterbuch im Minigame-Modus kostenlos sein soll.
+        // Andernfalls, wie in Ihrem ursprünglichen Code, wird es auch hier geöffnet.
+        dictionaryModal.style.display = 'flex';
+        loadDictionary();
     }
 }
 
@@ -432,7 +471,11 @@ function loadDictionary() {
     }
 }
 
-
+function toPhase2() {
+    document.getElementById('phase-1').style.display = 'none';
+    document.getElementById('phase-2').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 // Phase 2: Gelernte Vokabel anwenden
 const phase2Start = document.getElementById('phase-2-start');
@@ -452,7 +495,7 @@ function loadGapText() {
      window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-const textTemplate = "<p>An einem kühlen Herbstnachmittag betritt Paul ein kleines, gemütliches [Beisl]. Drinnen ist es warm, es riecht nach gebratenem Essen und altem Holz. Zwei Männer spielen Karten, der Wirt nickt Paul kurz zu. Die Fenster sind leicht beschlagen, und auf dem Tisch in der Ecke flackert eine Kerze.</p><p>Draußen fährt gerade eine [Bim] vorbei. Man hört das Quietschen auf den Schienen, das in der engen Gasse widerhallt. Paul wirft einen Blick hinaus, bevor er sich an seinen Platz setzt. Ihm fällt ein alter, dunkler [Kasten] auf, der neben der Tür steht – vielleicht ein alter Brotschrank oder ein Aufbewahrungsort für Geschirr.</p><p>Der Wirt bringt ihm ein [Häferl] mit dampfend heißem Tee. Der Rand ist leicht abgesprungen, aber Paul stört das nicht. Er nimmt einen Schluck, schaut sich um und atmet tief ein. Der Tee ist stark, beinahe herb, genau richtig für diesen Tag.</p><p>Aus der Küche dringt der Geruch von Essig und Zwiebeln. Eine Bedienung bringt einen Teller mit [Erdäpfel]salat an den Nebentisch. Paul sieht das dampfende Schnitzel daneben und bekommt selbst ein wenig Hunger.</p><p>Zurück am Tisch will er sich noch einen Apfelstrudel gönnen, doch als der Wirt zurückkommt, schüttelt dieser bedauernd den Kopf. „Der Strudel [ist] leider [aus]“, sagt er, „aber ich hätte noch Topfenkuchen.“ Paul lacht leise, nickt und sagt: „Dann eben den. Hauptsache, ich bekomme noch etwas Süßes.“ Erleichtert lehnt er sich zurück und genießt die wohlige Atmosphäre des Beisls, während draußen der Herbstwind durch die Gassen pfeift.</p>";
+const textTemplate = "<p>An einem kühlen Herbstnachmittag betritt Paul ein kleines, gemütliches [Beisl]. Drinnen ist es warm, es riecht nach gebratenem Essen und altem Holz. Zwei Männer spielen Karten, der Wirt nickt Paul kurz zu. Die Fenster sind leicht beschlagen, und auf dem Tisch in der Ecke flackert eine Kerze.</p><p>Draußen fährt gerade eine [Bim] vorbei. Man hört das Quietschen auf den Schienen, das in der engen Gasse widerhallt. Paul wirft einen Blick hinaus, bevor er sich an seinen Platz setzt. Ihm fällt ein alter, dunkler [Kasten] auf, der neben der Tür steht – vielleicht ein alter Brotschrank oder ein Aufbewahrungsort für Geschirr.</p><p>Der Wirt bringt ihm ein [Häferl] mit dampfend heißem Tee. Der Rand ist leicht abgesprungen, aber Paul stört das nicht. Er nimmt einen Schluck, schaut sich um und atmet tief ein. Der Tee ist stark, beinahe herb, genau richtig für diesen Tag.</p><p>Aus der Küche dringt der Geruch von Essig und Zwiebeln. Eine Bedienung bringt einen Teller mit [Erdäpfel]salat an den Nebentisch. Paul sieht das dampfende Schnitzel daneben und bekommt selbst ein wenig Hunger.</p><p>Zurück am Tisch will er sich noch einen Apfelstrudel gönnen, doch als der Wirt zurückkommt, schüttelt dieser bedauernd den Kopf. „Der Strudel [ist] leider [aus]“, sagt er, „aber ich hätte noch Topfenkuchen.“ Paul lacht leise, nickt und sagt: „Dann eben den. Hauptsache, ich bekomme noch etwas Süßes.“ Erleichtert lehnt er sich zurück und genießt die Atmosphäre, während draußen der Herbstwind durch die Gassen pfeift.</p>";
 
 let correctAnswers = [];
 let activeInput = null;

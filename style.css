@@ -81,12 +81,33 @@ h3 {
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(139, 69, 19, 0.8);
+    background: #FFD700;
+    color: black;
     padding: 12px 18px;
     border-radius: 20px;
     font-weight: bold;
     border: 2px solid var(--primary-color-dark);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#points-reaction {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+#progress-container {
+  width: 50%; /* Oder eine andere passende Breite */
+  background-color: #ddd; /* Grauer Hintergrund */
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 20px auto; /* Zentrieren und Abstand hinzufügen */
+}
+
+#progress-bar {
+  height: 10px;
+  width: 0;
+  background-color: #4CAF50; /* Grüne Füllung */
+  transition: width 0.5s ease-in-out; /* Weiche Animation */
 }
 
 .button-container {
@@ -191,7 +212,8 @@ summary {
 .story-text p, 
 .story-end p, 
 .reaction p,
-.modal p {
+.modal p 
+#phase1-completed p {
     margin-bottom: 1.5em;
 }
 

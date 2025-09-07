@@ -21,17 +21,14 @@
             <div class="content">
                 <h2>Spielanleitung</h2>
                 <div class="story-text">
-                    <p>Begib dich auf eine spannende Reise durch die Sprachlandschaft Österreichs! In diesem interaktiven Spiel bist du einem geheimnisvollen Löffelzeichen auf der Spur. Deine Reise führt dich an verschiedene Orte, wo du auf interessante NPCs triffst und typisch österreichische Begriffe kennenlernst. Aber Achtung: Um weiterzukommen und die Geheimnisse der Sprachloge zu lüften, musst du die Bedeutung dieser Wörter richtig erkennen und sie anschließend anwenden!</p>
+                    <p>Begib dich auf eine Reise durch Österreich und lüfte ein sprachliches Geheimnis. Deine Aufgabe ist es, typisch österreichische Begriffe zu lernen und anzuwenden, um das Rätsel des Löffelzeichens zu lösen.</p>
                     <p>Das Spiel besteht aus zwei Phasen.</p>
 
                     <h3>Phase 1</h3>
-                    <p>In Phase 1 lernst du die Wörter in Interaktionen mit NPCs kennen. Jede Interaktion folgt einem ähnlichen Muster:</p>
-                    <p>Du liest einen Einführungstext, der dich in die aktuelle Situation und zu neuen NPCs einführt. Dabei wirst du auf ein österreichisches Wort stoßen, das im Kontext der Geschichte eine Rolle spielt und das du möglicherweise nicht sofort verstehst. Am Ende des Textes werden dir zwei Auswahlmöglichkeiten präsentiert. Diese Auswahlmöglichkeiten basieren auf der Interpretation des neu gelernten Wortes. Wähle die Option, die deiner Meinung nach die korrekte Bedeutung des Wortes im Kontext widerspiegelt. Nach deiner Wahl erhältst du sofortiges Feedback in Form einer Reaktion der NPCs. Hast du die richtige Wahl getroffen, erhältst du einen Punkt. Die Geschichte nimmt ihren Lauf und du kommst der Lösung näher. Hast du dich geirrt, wird dies ebenfalls in der Geschichte reflektiert. Die NPCs geben dir einen weiteren Hinweis oder eine Erklärung, die dir hilft, die tatsächliche Bedeutung des Wortes zu verstehen, damit du sie dennoch lernen kannst. Du erhältst jedoch keinen Punkt für diese spezifische Interaktion.</p>
-                    <p>Nach jeder Interaktion wird dir eine Übersicht über das neu entdeckte Wort angezeigt. Dieses kannst du dann deinem persönlichen Wörterbuch hinzufügen, das alle neuen Wörter auf einem Fleck für dich sammelt. Außerdem kannst du es im Falle des Falles nutzen, um die Wörter noch einmal nachzuschlagen.</p>
-                    
+                    <p>Du trittst auf deiner Suche nach dem Geheimnis in Interaktion mit NPCs. Dabei lernst du neue österreichische Wörter kennen. Wähle die richtige Bedeutung aus, um einen Punkt zu verdienen und in der Geschichte voranzukommen. Dein Fortschritt wird durch eine Leiste angezeigt. Alle entdeckten Wörter werden in einem persönlichen Wörterbuch gesammelt, das du jederzeit nachschlagen kannst.</p>
+
                     <h3>Phase 2</h3>
-                    <p>In Phase 2 geht es darum, dass du zeigst, dass du die in Phase 1 neu gelernten Wörter nicht nur verstanden hast, sondern sie auch aktiv anwenden kannst. Dafür wird dir ein Text angezeigt, der Lücken enthält. Die Lücken sollst du mit den Wörtern füllen, die du vorher durch die Interaktionen in Phase 1 kennengelernt hast. Welches Wort wo einzusetzen ist, wird aus dem Kontext ersichtlich. Solltest du bei einem Wort Hilfe benötigen, kannst du die Punkte, die du in Phase 1 gesammelt hast, einlösen gegen einen kurzen Blick in das Wörterbuch. Alternativ kannst du dir auch den ersten Buchstaben des Wortes anzeigen lassen. Für falsche Antworten wird dir ein Punkt abgezogen.</p>
-                    <p>Solltest du zu einem Zeitpunkt keine Punkte mehr haben und trotzdem weitere Fehler machen, kannst du in einem Minigame die Zielwörter wiederholen und so Punkte sammeln, die du dann im Lückentext wieder einlösen kannst.</p>
+                    <p>Hier musst du zeigen, was du während Phase 1 gelernt hast. Ein Text mit Lücken wartet darauf, von dir vervollständigt zu werden. Fülle die Lücken mit den Wörtern aus Phase 1. Wenn du Hilfe benötigst, kannst du deine gesammelten Punkte einlösen. Solltest du keine Punkte mehr haben, kannst du in einem Minispiel weitere verdienen, um deine Reise fortzusetzen.</p>
                     <div class="button-container">
                         <button id="to-introduction-btn" onclick="toIntroduction()">Die Geschichte beginnt...</button>
                     </div>
@@ -62,6 +59,11 @@
             <div class="content" id="phase1-content">
                 <h2>Phase 1</h2>
                 <h3 id="interaction-headline"></h3>
+                
+                <div id="progress-container">
+                    <div id="progress-bar"></div>
+                </div>
+
                 <div class="interaction" id="interaction">
                     <div class="text-container">
                         <div class="story-text" id="story-text"></div>
@@ -71,8 +73,10 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="reaction" id="reaction" style="display: none;">
                     <div id="reaction-text"></div>
+                    <div id="points-reaction"></div>
                     <div class="button-container">
                         <button id="next">Neues Wort gefunden</button>
                     </div>
@@ -96,8 +100,23 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="phase1-completed" class="text-container" style="display: none;">
+                    <h3>Phase 1 abgeschlossen!</h3>
+                    <div class="story-text">
+                        <p>Dank des Hinweises von Frau Moser weißt du nun also, dass du dich in die Pfarrkirche St. Jakob begeben musst, um dahinterzukommen, wobei es sich bei dem gut gehüteten Geheimnis der Loge handelt. Und du weißt, dass du beweisen musst, dass du österreichisches Kulturgut, und dazu gehören auch die österreichischen Sprachgepflogenheiten, zu schätzen weißt. Wie gut, dass du auf deiner bisherigen Reise bereits einige Wörter kennengelernt hast! Vielleicht können dir diese ja weiterhelfen?</p>
+                        <p>Begib dich zur Pfarrkirche St. Jakob, um dem Geheimnis einen Schritt näherzukommen.</p>
+                        <div class="button-container">
+                            <button id="to-phase2" onclick="toPhase2()">Ab zur Pfarrkriche St. Jakob</button>
+                        </div>
+                    </div>
             </div>
+            </div>
+
+            
         </div>
+
+        
 
         <div id="phase-2" style="display: none;">
             <div class="content" id="phase2-content">
@@ -105,7 +124,6 @@
                 <h3>Lückentext</h3>
                 <div id="phase-2-start">
                     <div class="story-text">
-                        <p>Dank des Hinweises von Frau Moser weißt du nun also, dass du dich in die Pfarrkirche St. Jakob begeben musst, um dahinterzukommen, wobei es sich bei dem gut gehüteten Geheimnis der Loge handelt. Und du weißt, dass du beweisen musst, dass du österreichisches Kulturgut, und dazu gehören auch die österreichischen Sprachgepflogenheiten, zu schätzen weißt.</p>
                         <p>Beim Betreten der kühlen, ehrwürdigen Pfarrkirche St. Jakob umgibt dich der vertraute Duft von Weihrauch und altem Holz. Das Licht fällt durch die bunten Fenster und wirft farbige Muster auf den Steinboden. Kaum hast du ein paar Schritte gemacht, tritt ein älterer Herr aus einer Seitennische hervor. Er trägt einen schlichten schwarzen Anzug, hat silbergraues Haar und einen durchdringenden Blick. In der Hand hält er ein gefaltetes Blatt Papier.</p>
                         <p>„Ah, du bist also der oder die Neue, von dem Frau Moser gesprochen hat“, sagt er mit ruhiger Stimme. „Wenn du wirklich wissen willst, worum es sich bei dem Geheimnis der Loge handelt, dann musst du erst beweisen, dass du unsere Sprache und unser Kulturgut zu würdigen weißt. Keine Sorge – es ist nur ein kleiner Test. Ein Lückentext.“</p>
                         <p>Er reicht dir das Blatt. Du erkennst, dass es sich um einen kurzen Text handelt, in dem typische österreichische Ausdrücke fehlen. Der Mann sieht dich auffordernd an.</p>
