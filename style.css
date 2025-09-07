@@ -433,6 +433,10 @@ input.blank {
 }
 
 @media (max-width: 800px) {
+    *{
+        font-size: 10px;
+    }
+
     .game-container {
         width: 98%;
         margin: 10px auto;
