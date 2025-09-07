@@ -313,6 +313,10 @@ summary {
     transform: scale(1.05);
 }
 
+#add-word-to-dict {
+    margin-top: 1em;
+}
+
 .phase-btn {
     background: var(--accent-green);
     color: white;
@@ -433,9 +437,6 @@ input.blank {
 }
 
 @media (max-width: 800px) {
-    *{
-        font-size: 10px;
-    }
 
     .game-container {
         width: 98%;

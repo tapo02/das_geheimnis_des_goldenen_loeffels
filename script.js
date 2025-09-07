@@ -374,12 +374,12 @@ function toggleDictionary() {
         return;
     }
 
-    // Phase 1 Logik
+    // Phase 1: Logik
     if (phase1.style.display === 'block') {
         dictionaryModal.style.display = 'flex';
         loadDictionary();
     } 
-    // Phase 2 Logik
+    // Phase 2: Logik
     else if (phase2.style.display === 'block') {
         // Guard-Clause: Tue nichts, wenn das 'phase-2-start' Div sichtbar ist.
         if (phase2Start.style.display === 'block') {
@@ -388,8 +388,8 @@ function toggleDictionary() {
 
         // Überprüfe die Bedingungen nur, wenn der eigentliche Lückentext-Modus ('phase-2-game') aktiv ist.
         if (phase2Game.style.display === 'block') {
-            if (gameState.points >= 2) {
-                gameState.points -= 2; // zwei Punkte abziehen
+            if (gameState.points >= 4) {
+                gameState.points -= 4; // vier Punkte abziehen
                 // Aktualisiere die Punkteanzeige
                 const pointsDisplay = document.getElementById("points-display");
                 if (pointsDisplay) {
@@ -403,7 +403,7 @@ function toggleDictionary() {
             }
         }
     }
-    // Minigame-Modus Logik
+    // Minigame-Modus: Logik
     else {
         // Hier können Sie Logik hinzufügen, wenn das Wörterbuch im Minigame-Modus kostenlos sein soll.
         // Andernfalls, wie in Ihrem ursprünglichen Code, wird es auch hier geöffnet.
